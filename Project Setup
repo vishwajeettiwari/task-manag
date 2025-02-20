@@ -1,0 +1,2 @@
+go mod init taskmanager
+go get github.com/gin-gonic/gin gorm.io/gorm github.com/golang-jwt/jwt/v5
