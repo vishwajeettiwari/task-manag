@@ -1,0 +1,29 @@
+// services/ai.go
+package services
+
+import (
+	"bytes"
+	"encoding/json"
+	"net/http"
+)
+
+type AIService struct {
+	APIKey string
+}
+
+func (s *AIService) GenerateTaskSuggestions(prompt string) (string, error) {
+	requestBody, _ := json.Marshal(map[string]interface{}{
+		"model": "gpt-3.5-turbo",
+		"messages": []map[string]string{{
+			"role":    "user",
+			"content": "Generate subtasks for: " + prompt,
+		}},
+	})
+
+	resp, err := http.Post("https://api.openai.com/v1/chat/completions",
+		"application/json",
+		bytes.NewBuffer(requestBody))
+	
+	// Handle response and parse result
+	return parsedResponse, nil
+}
